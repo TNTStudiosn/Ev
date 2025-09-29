@@ -31,19 +31,21 @@ public class EvClient implements ClientModInitializer {
             });
         });
 
-        // Receptor para el paquete del logro (versión corregida final)
+        // Receptor para el paquete del logro
         ClientPlayNetworking.registerGlobalReceiver(AchievementUnlockedPayload.ID, (payload, context) -> {
             context.client().execute(() -> {
                 MinecraftClient client = context.client();
                 ToastManager toastManager = client.getToastManager();
 
-                // 1. Preparo los componentes visuales del logro.
-                Text title = Text.literal("Logro completado");
-                Text description = Text.literal(payload.achievementText());
+                // 1. ¡CAMBIO REALIZADO AQUÍ!
+                // Ahora, el texto que envías con el comando es el título principal.
+                Text title = Text.literal(payload.achievementText());
+                // Y "Logro completado" es el subtítulo o descripción.
+                Text description = Text.literal("Logro completado");
                 ItemStack icon = new ItemStack(Items.DANDELION);
                 AdvancementFrame frame = AdvancementFrame.CHALLENGE;
 
-                // 2. Creo el objeto que contiene la información visual (esto estaba bien).
+                // 2. Creo el objeto que contiene la información visual.
                 AdvancementDisplay display = new AdvancementDisplay(
                         icon,
                         title,
@@ -55,15 +57,13 @@ public class EvClient implements ClientModInitializer {
                         true
                 );
 
-                // 3. ¡CORRECCIÓN FINAL!
-                // El método Advancement.Builder.build() ahora devuelve directamente un AdvancementEntry.
-                // Así que lo capturo en una variable de ese tipo y listo.
+                // 3. Creo el AdvancementEntry falso para poder mostrar el toast.
                 Identifier tempId = Identifier.of("ev", "temp_achievement");
                 AdvancementEntry dummyAdvancementEntry = Advancement.Builder.create()
                         .display(display)
                         .build(tempId);
 
-                // 4. Creo el toast con el AdvancementEntry y lo muestro.
+                // 4. Creo el toast y lo muestro.
                 toastManager.add(new AdvancementToast(dummyAdvancementEntry));
             });
         });
