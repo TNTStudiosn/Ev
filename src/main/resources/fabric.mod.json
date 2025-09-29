@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "ev",
+  "version": "${version}",
+  "name": "Ev",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/ev/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.TNTStudios.ev.client.EvClient"
+    ],
+    "main": [
+      "com.TNTStudios.ev.Ev"
+    ]
+  },
+  "mixins": [
+    "ev.mixins.json",
+    {
+      "config": "ev.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
