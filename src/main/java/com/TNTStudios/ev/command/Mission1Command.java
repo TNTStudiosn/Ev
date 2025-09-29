@@ -26,7 +26,7 @@ public class Mission1Command {
 
     public static boolean missionActive = false;
     public static int jumpsCompleted = 0;
-    public static final int JUMPS_REQUIRED = 20;
+    public static final int JUMPS_REQUIRED = 40;
     public static int initialTotalJumps = 0;
 
 
